@@ -1101,7 +1101,8 @@
 	cold_level_3 = 150
 
 	flags = list(
-	 NO_BREATHE = TRUE
+	 IS_WHITELISTED = TRUE
+	,NO_BREATHE = TRUE
 	,NO_SCAN = TRUE
 	,NO_PAIN = TRUE
 	,HAS_SKIN_COLOR = TRUE
