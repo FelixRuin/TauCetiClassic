@@ -1,0 +1,61 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/floor{icon_state = "warndark"; dir = 9; basetype = /turf/simulated/mineral},/area/space)
+"c" = (/obj/machinery/door/airlock,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"d" = (/turf/simulated/floor{icon_state = "warndark"; dir = 5; basetype = /turf/simulated/mineral},/area/space)
+"e" = (/turf/simulated/floor{basetype = /turf/simulated/mineral; dir = 8; icon_state = "warndark"},/area/space)
+"f" = (/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "dark"},/area/space)
+"g" = (/obj/structure/table,/obj/machinery/reagentgrinder,/obj/structure/sign/warning/nosmoking{pixel_y = 32},/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"h" = (/turf/simulated/floor{icon_state = "warndark"; dir = 10; basetype = /turf/simulated/mineral},/area/space)
+"i" = (/obj/structure/table,/obj/item/weapon/storage/box/solution_trays,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"j" = (/turf/simulated/floor{icon_state = "warndark"; dir = 6; basetype = /turf/simulated/mineral},/area/space)
+"k" = (/obj/structure/grille,/obj/structure/window/reinforced{icon_state = "rwindow"; dir = 5},/turf/space,/area/space)
+"l" = (/turf/simulated/wall{basetype = /turf/simulated/mineral; mineral = "metal"},/area/space)
+"m" = (/turf/simulated/wall/mineral/silver{basetype = /turf/simulated/mineral; desc = "This white wall looks, like I'm stuck in evil laboratory"; name = "white wall"},/area/space)
+"n" = (/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"o" = (/obj/structure/rack,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"p" = (/obj/structure/table,/obj/item/weapon/storage/box/beakers{pixel_x = 2; pixel_y = 2},/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"q" = (/obj/structure/window/reinforced{icon_state = "rwindow"; dir = 5},/obj/structure/grille,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"r" = (/turf/simulated/floor{icon_state = "warndark"; dir = 1; basetype = /turf/simulated/mineral},/area/space)
+"s" = (/turf/simulated/floor{dir = 2; icon_state = "dark"},/area/space)
+"t" = (/turf/simulated/floor{icon_state = "warndark"; dir = 4; basetype = /turf/simulated/mineral},/area/space)
+"u" = (/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"v" = (/turf/simulated/floor{icon_state = "warndark"; dir = 2; basetype = /turf/simulated/mineral},/area/space)
+"w" = (/obj/structure/table,/obj/machinery/bunsen_burner{pixel_y = 2},/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"x" = (/obj/machinery/chem_dispenser,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"y" = (/obj/structure/stool/bed/chair/office/light{dir = 8},/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"z" = (/obj/machinery/chem_master,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"A" = (/obj/structure/table,/obj/item/weapon/reagent_containers/glass/beaker/large,/obj/item/weapon/reagent_containers/dropper{pixel_y = -4},/obj/machinery/light,/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+"B" = (/obj/structure/table,/obj/item/weapon/reagent_containers/glass/beaker/water,/obj/item/weapon/reagent_containers/glass/beaker/fuel,/obj/item/weapon/reagent_containers/glass/bottle/toxin,/obj/item/weapon/reagent_containers/glass/beaker/sulphuric{name = "beaker 'sulphuric acid'"},/turf/simulated/floor{basetype = /turf/simulated/mineral; icon_state = "white"},/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaalaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaamaaaaaaaaaaaaaa
+aaaaaaaalllllllaaaaaaaaaaaaaaa
+aaaaaaaalbrrrdlaaaaaaaaaaaaaaa
+aaaaaaaalesfftqmmmmaaaaaaaaaaa
+aaaaaaaalefuftqnnnmaaaaaaaaaaa
+aaaaaaaaleffftqnnnmaaaaaaaaaaa
+aaaaaaaalhvvvjlnnnmaaaaaaaaaaa
+aaammmmmllnnnllnnnmaaaaaaaaaaa
+aaamononlnnnnnlnnnmaaaaaaaaaaa
+aaamononlnnnnnlnnnmaaaaaaaaaaa
+aaamononllnnnllmnmmaaaaaaaaaaa
+aaamonnnnnnnnnnnnnmaaaaaaaaaaa
+aaamonnnnnnnnnnnnnmaaaaaaaaaaa
+aaamonnnnnnnnnnnnnmaaaaaaaaaaa
+aaamonnnnnnnnnnnnnmaaaaaaaaaaa
+aaalllllllnnnnnnnnmaaaaaaaaaaa
+aaacnnngiknnnnnnnnmaaaaaaaaaaa
+aaalpnnnwknnnnnnnnmaaaaaaaaaaa
+aaalxynnnlnnnmmmmmmaaaaaaaaaaa
+aaalzABnncnnnmaaaaaaaaaaaaaaaa
+aaalllllllnnnmaaaaaaaaaaaaaaaa
+aaammmmmmmmcmmaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
