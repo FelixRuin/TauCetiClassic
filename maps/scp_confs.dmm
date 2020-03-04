@@ -1,0 +1,69 @@
+"a" = (/turf/space,/area/space)
+"b" = (/turf/simulated/wall/r_wall,/area/space)
+"c" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/airlock/maintenance{name = "Brainstorm Maintenance"; req_access = list(47)},/obj/machinery/door/firedoor,/obj/structure/disposalpipe/segment,/turf/simulated/floor/plating,/area/space)
+"d" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall/r_wall,/area/space)
+"e" = (/obj/structure/extinguisher_cabinet{pixel_x = -24},/obj/structure/reagent_dispensers/water_cooler,/turf/simulated/floor{icon_state = "white"},/area/space)
+"f" = (/obj/structure/bookcase/manuals/research_and_development,/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor{icon_state = "whitepurple"},/area/space)
+"g" = (/obj/structure/chalkboard,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{dir = 1; icon_state = "whitepurple"},/area/space)
+"h" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"i" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/space)
+"j" = (/obj/machinery/photocopier,/obj/machinery/camera{c_tag = "Brainstorm Center"; dir = 0; network = list("SS13","Research")},/obj/structure/disposalpipe/segment,/turf/simulated/floor{dir = 1; icon_state = "whitepurple"},/area/space)
+"k" = (/obj/machinery/alarm{dir = 4; pixel_x = -22},/turf/simulated/floor{icon_state = "white"},/area/space)
+"l" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"m" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor{icon_state = "white"},/area/space)
+"n" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"o" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_x = 27},/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/space)
+"p" = (/obj/machinery/newscaster{pixel_x = -32},/obj/machinery/hologram/holopad,/obj/machinery/light{dir = 8},/turf/simulated/floor{icon_state = "white"},/area/space)
+"q" = (/obj/structure/table/glass,/obj/item/weapon/paper{layer = 3},/obj/item/weapon/pen,/obj/structure/disposalpipe/segment,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"r" = (/obj/structure/table/glass,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "white"},/area/space)
+"s" = (/obj/structure/table/glass,/obj/item/weapon/folder/blue,/turf/simulated/floor{icon_state = "white"},/area/space)
+"t" = (/obj/structure/table/glass,/obj/item/weapon/storage/box/cups,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"u" = (/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/machinery/light{dir = 4},/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/space)
+"v" = (/obj/machinery/power/apc{dir = 8; name = "Brainstorm Center APC"; pixel_x = -25},/obj/structure/cable{d2 = 4; icon_state = "0-4"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"w" = (/obj/structure/stool/bed/chair/office/light{dir = 1},/obj/effect/landmark/start{name = "Scientist"},/obj/structure/disposalpipe/segment,/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"x" = (/obj/structure/stool/bed/chair/office/light{dir = 1},/obj/effect/landmark/start{name = "Scientist"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"y" = (/obj/structure/stool/bed/chair/office/light{dir = 1},/obj/effect/landmark/start{name = "Scientist"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"z" = (/obj/machinery/atmospherics/components/unary/vent_scrubber/on{dir = 8},/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/space)
+"A" = (/turf/simulated/floor{icon_state = "white"},/area/space)
+"B" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/space)
+"C" = (/obj/machinery/atmospherics/components/unary/vent_pump/on{dir = 4},/obj/machinery/light_switch{pixel_y = -28},/turf/simulated/floor{icon_state = "whitepurple"},/area/space)
+"D" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor{icon_state = "whitepurple"},/area/space)
+"E" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "whitepurple"},/area/space)
+"F" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "white"},/area/space)
+"G" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall,/area/space)
+"H" = (/turf/simulated/wall,/area/space)
+"I" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/space)
+"J" = (/obj/machinery/door/airlock/research/glass{name = "Brainstorm Center"; req_access = list(47)},/obj/machinery/door/firedoor,/obj/structure/disposalpipe/segment,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor{icon_state = "white"},/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaabbbbbcdbaaaaaaaaaaaaaaaaaa
+aaaabefghijbaaaaaaaaaaaaaaaaaa
+aaaabklmmnobaaaaaaaaaaaaaaaaaa
+aaaabpqrstubaaaaaaaaaaaaaaaaaa
+aaaabvwxxyzbaaaaaaaaaaaaaaaaaa
+aaaabABCDEFbaaaaaaaaaaaaaaaaaa
+aaaabbGHIJIbaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

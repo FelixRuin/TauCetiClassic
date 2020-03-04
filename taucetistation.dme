@@ -1907,6 +1907,8 @@
 #include "code\unit_tests\unit_test.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "maps\scp22.dmm"
+#include "maps\scp_confs.dmm"
 #include "maps\scp_lab.dmm"
 #include "maps\centcom\centcom.dmm"
 #include "maps\testmap\job_changes.dm"
