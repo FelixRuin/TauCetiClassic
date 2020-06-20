@@ -151,8 +151,8 @@ obj/item/clothing/head/cakehat/get_current_temperature()
  * Kitty ears
  */
 /obj/item/clothing/head/kitty
-	name = "kitty ears"
-	desc = "A pair of kitty ears. Meow!"
+	name = "tajaran ears"
+	desc = "A pair of tajaran ears. Meow?"
 	icon_state = "kitty"
 	body_parts_covered = 0
 	var/icon/mob
