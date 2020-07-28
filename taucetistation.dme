@@ -1901,6 +1901,7 @@
 #include "code\modules\roguelike\mob_modifiers\positive.dm"
 #include "code\modules\roguelike\name_modifiers\prefixes.dm"
 #include "code\modules\roguelike\name_modifiers\suffixes.dm"
+#include "code\modules\SCP\SCP.dm"
 #include "code\modules\scrap\oldificator.dm"
 #include "code\modules\scrap\scrap.dm"
 #include "code\modules\scrap\scrap_beacon.dm"
