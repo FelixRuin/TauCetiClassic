@@ -170,6 +170,7 @@
 // (Bay12 = -2), but we don't have that projectile code, so...
 #define PROJECTILE_FORCE_MISS -1
 #define PROJECTILE_ACTED 0 // it means that something else has took control of bullet_act() proc and it didn't run till the end.
+#define PROJECTILE_ABSORBED 2
 #define PROJECTILE_ALL_OK 3
 
 #define COORD(A) "([A.x],[A.y],[A.z])"
@@ -178,7 +179,7 @@
 #define ERROR_USEFUL_LEN 2
 
 //Filters
-#define AMBIENT_OCCLUSION filter(type = "drop_shadow", x = 0, y = -2, size = 4, border = 4, color = "#04080FAA")
+#define AMBIENT_OCCLUSION filter(type = "drop_shadow", x = 0, y = -2, size = 4, color = "#04080FAA")
 
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 

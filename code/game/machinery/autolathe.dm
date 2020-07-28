@@ -38,8 +38,8 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/reagent_containers/glass/beaker/vial(), \
 		new /obj/item/weapon/reagent_containers/syringe(), \
 		new /obj/item/ammo_casing/shotgun/beanbag(), \
-		new /obj/item/ammo_box/magazine/c45r(), \
-		new /obj/item/ammo_box/magazine/m9mm_2/rubber(), \
+		new /obj/item/ammo_box/c45r(), \
+		new /obj/item/ammo_box/c9mmr(), \
 		new /obj/item/device/taperecorder(), \
 		new /obj/item/device/assembly/igniter(), \
 		new /obj/item/device/assembly/signaler(), \
@@ -57,6 +57,8 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/minihoe(), \
 		new /obj/item/weapon/hand_labeler(), \
 		new /obj/item/device/destTagger(), \
+		new /obj/item/toy/gun(), \
+		new /obj/item/toy/ammo/gun(), \
 		new /obj/item/weapon/game_kit/random(), \
 		new /obj/item/newscaster_frame(),
 		new /obj/item/device/tabletop_assistant()
@@ -69,8 +71,8 @@ var/global/list/autolathe_recipes_hidden = list( \
 		new /obj/item/weapon/weldingtool/largetank(), \
 		new /obj/item/weapon/handcuffs(), \
 		new /obj/item/ammo_box/a357(), \
-		new /obj/item/ammo_box/magazine/c45m(), \
-		new /obj/item/ammo_box/magazine/m9mm_2(), \
+		new /obj/item/ammo_box/c45(), \
+		new /obj/item/ammo_box/c9mm(), \
 		new /obj/item/ammo_casing/shotgun(), \
 		new /obj/item/ammo_casing/shotgun/dart(), \
 		new /obj/item/ammo_casing/shotgun/buckshot(), \
@@ -146,16 +148,21 @@ var/global/list/autolathe_recipes_hidden = list( \
 	var/coeff = 2 ** prod_coeff
 	var/dat
 
-	dat = text("<B>Metal Amount:</B> [src.m_amount] cm<sup>3</sup> (MAX: [max_m_amount])<BR>\n<FONT color=blue><B>Glass Amount:</B></FONT> [src.g_amount] cm<sup>3</sup> (MAX: [max_g_amount])<HR>")
+	dat = "<B>Metal Amount:</B> [src.m_amount] cm<sup>3</sup> (MAX: [max_m_amount])<BR>\n<FONT color='#24b6bbff'><B>Glass Amount:</B></FONT> [src.g_amount] cm<sup>3</sup> (MAX: [max_g_amount])<HR>"
+	dat += "<div class='statusDisplay'>"
+	dat += "<table>"
 	var/list/objs = list()
 	objs += src.L
 	if (src.hacked)
 		objs += src.LL
 	for(var/obj/t in objs)
+		dat += "<tr>"
+		dat += {"<td><span class="autolathe32x32 [replacetext(replacetext("[t.type]", "/obj/item/", ""), "/", "-")]"></span></td>"}
+		dat += "<td>"
 		if (istype(t, /obj/item/stack))
 			var/title = "[t.name] ([t.m_amt] m /[t.g_amt] g)"
 			if (m_amount<t.m_amt || g_amount<t.g_amt)
-				dat += title + "<br>"
+				dat += title
 				continue
 			dat += "<A href='?src=\ref[src];make=\ref[t]'>[title]</A>"
 
@@ -172,13 +179,19 @@ var/global/list/autolathe_recipes_hidden = list( \
 		else
 			var/title = "[t.name] ([t.m_amt/coeff] m /[t.g_amt/coeff] g)"
 			if (m_amount<t.m_amt/coeff || g_amount<t.g_amt/coeff)
-				dat += title + "<br>"
+				dat += title
 				continue
 			dat += "<A href='?src=\ref[src];make=\ref[t]'>[title]</A>"
-		dat += "<br>"
+		dat += "</td>"
+		dat += "</tr>"
+	dat += "</table>"
+	dat += "</div>"
 
-	user << browse("<HTML><HEAD><TITLE>Autolathe Control Panel</TITLE></HEAD><BODY><TT>[entity_ja(dat)]</TT></BODY></HTML>", "window=autolathe_regular")
-	onclose(user, "autolathe_regular")
+	var/datum/browser/popup = new(user, "window=autolathe_regular", "Autolathe")
+	popup.add_stylesheet(get_asset_datum(/datum/asset/spritesheet/autolathe))
+	popup.set_content(dat)
+	popup.open()
+
 
 /obj/machinery/autolathe/proc/shock(mob/user, prb)
 	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
@@ -203,7 +216,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 
 /obj/machinery/autolathe/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/pai_cable))
-		return 
+		return
 	if (busy)
 		to_chat(user, "<span class='warning'>The autolathe is busy. Please wait for completion of previous operation.</span>")
 		return 1
@@ -343,4 +356,4 @@ var/global/list/autolathe_recipes_hidden = list( \
 				if(src.g_amount < 0)
 					src.g_amount = 0
 				busy = 0
-	updateUsrDialog()
+	src.updateUsrDialog()

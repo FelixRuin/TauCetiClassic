@@ -677,6 +677,8 @@
 					"adjust_external_pressure",
 					"set_external_pressure",
 					"checks",
+					"o2_scrub",
+					"n2_scrub",
 					"co2_scrub",
 					"tox_scrub",
 					"n2o_scrub",
@@ -898,13 +900,13 @@ Code shamelessly copied from apc_frame
 	icon_state = "alarm_bitem"
 	flags = CONDUCT
 
-/obj/item/alarm_frame/attackby(obj/item/weapon/W, mob/user)
-	if(iswrench(W))
+/obj/item/alarm_frame/attackby(obj/item/I, mob/user, params)
+	if(iswrench(I))
 		user.SetNextMove(CLICK_CD_RAPID)
 		new /obj/item/stack/sheet/metal(loc, 2)
 		qdel(src)
 		return
-	..()
+	return ..()
 
 /obj/item/alarm_frame/proc/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr)>1)
@@ -1154,6 +1156,20 @@ FIRE ALARM
 		FA.update_icon()
 		playsound(src, 'sound/machines/alarm_fire.ogg', VOL_EFFECTS_MASTER, null, FALSE)
 
+/obj/machinery/firealarm/examine(mob/user)
+	. = ..()
+	var/msg
+	switch(get_security_level())
+		if("green")
+			msg = "<font color='green'><b>Green</b></font>"
+		if("blue")
+			msg = "<font color='blue'><b>Blue</b></font>"
+		if("red")
+			msg = "<font color='red'><b>Red</b></font>"
+		if("delta")
+			msg = "<font color='purple'><b>Delta</b></font>"
+	to_chat(user, "The small light indicates [msg] security level.")
+
 /obj/machinery/firealarm/atom_init(mapload, dir, building)
 	. = ..()
 
@@ -1209,13 +1225,13 @@ Code shamelessly copied from apc_frame
 	icon_state = "fire_bitem"
 	flags = CONDUCT
 
-/obj/item/firealarm_frame/attackby(obj/item/weapon/W, mob/user)
-	if(iswrench(W))
+/obj/item/firealarm_frame/attackby(obj/item/I, mob/user, params)
+	if(iswrench(I))
 		user.SetNextMove(CLICK_CD_RAPID)
 		new /obj/item/stack/sheet/metal(loc, 2)
 		qdel(src)
 		return
-	..()
+	return ..()
 
 /obj/item/firealarm_frame/proc/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr) > 1)

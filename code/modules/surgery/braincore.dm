@@ -12,6 +12,8 @@
 	if (!ishuman(target))
 		return FALSE
 	var/obj/item/organ/external/BP = target.get_bodypart(target_zone)
+	if(isnull(BP))
+		return FALSE
 	return target_zone == BP_HEAD && BP.open
 
 /datum/surgery_step/brain/saw_skull
@@ -101,9 +103,7 @@
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	target.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	msg_admin_attack("[user.name] ([user.ckey]) debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])", user)
+	target.log_combat(user, "debrained with [tool.name] (INTENT: [uppertext(user.a_intent)])")
 
 	var/obj/item/brain/B
 	B = new(target.loc)
@@ -147,7 +147,7 @@
 	"<span class='notice'>You inserts [tool] into [target]'s [BP.name].</span>")
 
 	if(!istype(tool, /obj/item/brain))
-		return 
+		return
 
 	//this might actually be outdated since barring badminnery, a debrain'd body will have any client sucked out to the brain's internal mob. Leaving it anyway to be safe. --NEO
 	if(target.key)//Revised. /N

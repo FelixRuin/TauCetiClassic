@@ -1,6 +1,6 @@
 #define CAN_MAKE_A_SOUND !muzzled && (last_sound_emote < world.time)
-/mob/living/carbon/xenomorph/humanoid/emote(act, m_type = SHOWMSG_VISUAL, message = null)
 
+/mob/living/carbon/xenomorph/humanoid/emote(act, m_type = SHOWMSG_VISUAL, message = null, auto)
 	if(stat == DEAD && (act != "deathgasp"))
 		return
 	if(stat == UNCONSCIOUS)
@@ -9,6 +9,10 @@
 		if(act != "hiss")
 			act = copytext(act, 1, length(act))
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
+
+	// These scare the enemies out, causing them to lose 10 combo points.
+	if(act == "scream")
+		act = pick("roar", "growl", "hiss")
 
 	switch(act)
 
@@ -26,21 +30,29 @@
 			m_type = SHOWMSG_AUDIO
 			if(CAN_MAKE_A_SOUND)
 				playsound(src, 'sound/voice/xenomorph/whimper.ogg', VOL_EFFECTS_MASTER, 25)
+
+			add_combo_value_all(10)
 		if("roar")
 			message = "<B>The [src.name]</B>[pick(" triumphantly", " menacingly", "")] roars."
 			m_type = SHOWMSG_AUDIO
 			if(CAN_MAKE_A_SOUND)
 				playsound(src, pick(SOUNDIN_XENOMORPH_ROAR), VOL_EFFECTS_MASTER, vary = FALSE)
+
+			add_combo_value_all(-10)
 		if("hiss")
 			message = "<B>The [src.name]</B>[pick(" predatory", " dissatisfied", " maliciously", " menacingly", " suspiciously", "")] hisses!"
 			m_type = SHOWMSG_AUDIO
 			if(CAN_MAKE_A_SOUND)
 				playsound(src, pick(SOUNDIN_XENOMORPH_HISS), VOL_EFFECTS_MASTER, vary = FALSE)
+
+			add_combo_value_all(-10)
 		if("growl")
 			message = "<B>The [src.name]</B>[pick(" relaxed", " predatory", " excitedly", " joyfully", " maliciously", " menacingly", " suspiciously", "")] growls."
 			m_type = SHOWMSG_AUDIO
 			if(CAN_MAKE_A_SOUND)
 				playsound(src, pick(SOUNDIN_XENOMORPH_GROWL), VOL_EFFECTS_MASTER, vary = FALSE)
+
+			add_combo_value_all(-10)
 
 //  ========== BASIC ==========
 
@@ -71,6 +83,11 @@
 		if("jump")
 			message = "<B>The [src.name]</B>[pick(" happily", " joyfully", "")] jumps!"
 			m_type = SHOWMSG_VISUAL
+
+		if ("pray")
+			m_type = SHOWMSG_VISUAL
+			message = "<b>[src]</b> prays."
+			INVOKE_ASYNC(src, /mob.proc/pray_animation)
 
 //  ========== EXTENDED ==========
 
@@ -145,8 +162,8 @@
 		for(var/mob/M in observer_list)
 			if(!M.client)
 				continue //skip leavers
-			if((M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
-				to_chat(M, message)
+			if((M.client.prefs.chat_ghostsight != CHAT_GHOSTSIGHT_NEARBYMOBS) && !(M in viewers(src, null)))
+				to_chat(M, "<a href='byond://?src=\ref[src];track=\ref[src]'>(F)</a> [message]") // ghosts don't need to be checked for deafness, type of message, etc. So to_chat() is better here
 
 		if(m_type & SHOWMSG_VISUAL)
 			for(var/mob/O in viewers(src, null))

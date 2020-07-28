@@ -130,15 +130,16 @@
 	multiple_sprites = 1 */
 //TG-stuff
 /obj/item/ammo_box/a357
-	name = "ammo box (.357)"
-	desc = "A box of .357 ammo"
+	name = "speedloader (.357)"
+	desc = "A .357 speedloader."
 	icon_state = "357"
 	ammo_type = /obj/item/ammo_casing/a357
 	max_ammo = 7
 	multiple_sprites = 1
 
 /obj/item/ammo_box/c38
-	name = "speed loader (.38)"
+	name = "speedloader (.38 rubber)"
+	desc = "A .38 speedloader."
 	icon_state = "38"
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 6
@@ -163,7 +164,16 @@
 	icon_state = "9mm"
 	origin_tech = "combat=2"
 	ammo_type = /obj/item/ammo_casing/c9mm
-	max_ammo = 30
+	max_ammo = 12
+	multiple_sprites = 2
+
+/obj/item/ammo_box/c9mmr
+	name = "Ammunition Box (9mm rubber)"
+	icon_state = "9mmr"
+	origin_tech = "combat=2"
+	ammo_type = /obj/item/ammo_casing/c9mmr
+	max_ammo = 12
+	multiple_sprites = 2
 /*
 /obj/item/ammo_box/c10mm
 	name = "Ammunition Box (10mm)"
@@ -174,10 +184,19 @@
 
 /obj/item/ammo_box/c45
 	name = "Ammunition Box (.45)"
-	icon_state = "9mm"
+	icon_state = "c45"
 	origin_tech = "combat=2"
 	ammo_type = /obj/item/ammo_casing/c45
-	max_ammo = 30
+	max_ammo = 7
+	multiple_sprites = 2
+
+/obj/item/ammo_box/c45r
+	name = "Ammunition Box (.45 rubber)"
+	icon_state = "c45r"
+	origin_tech = "combat=2"
+	ammo_type = /obj/item/ammo_casing/c45r
+	max_ammo = 7
+	multiple_sprites = 2
 
 /obj/item/ammo_box/a12mm
 	name = "Ammunition Box (12mm)"

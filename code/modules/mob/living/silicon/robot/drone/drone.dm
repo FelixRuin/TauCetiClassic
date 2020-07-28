@@ -34,7 +34,7 @@
 
 	drone_list += src
 
-	if(camera && "Robots" in camera.network)
+	if(camera && ("Robots" in camera.network))
 		camera.add_network("Engineering")
 
 	//They are unable to be upgraded, so let's give them a bit of a better battery.
@@ -287,7 +287,7 @@
 			continue
 		if(O.client)
 			var/client/C = O.client
-			if(!C.prefs.ignore_question.Find("drone") && (ROLE_PAI in C.prefs.be_role))
+			if(!C.prefs.ignore_question.Find(IGNORE_DRONE) && (ROLE_GHOSTLY in C.prefs.be_role))
 				question(C)
 
 /mob/living/silicon/robot/drone/proc/question(client/C)
@@ -300,7 +300,7 @@
 		if(response == "Yes")
 			transfer_personality(C)
 		else if (response == "Never for this round")
-			C.prefs.ignore_question += "drone"
+			C.prefs.ignore_question += IGNORE_DRONE
 
 /mob/living/silicon/robot/drone/proc/transfer_personality(client/player)
 

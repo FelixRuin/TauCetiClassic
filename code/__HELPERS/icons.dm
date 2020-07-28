@@ -665,12 +665,22 @@ The _flatIcons list is a cache for generated icon files.
 			noIcon = TRUE // Do not render this object.
 
 	var/curdir
+	var/base_icon_dir	//We'll use this to get the icon state to display if not null BUT NOT pass it to overlays as the dir we have
 	if(!exact && (!A.dir || A.dir == SOUTH))
 		curdir = defdir
 	else if(exact)
 		curdir = SOUTH
 	else
 		curdir = A.dir
+
+	//Try to remove/optimize this section ASAP, CPU hog.
+	//Determines if there's directionals.
+	if(!noIcon && curdir != SOUTH)
+		if(!length(icon_states(icon(curicon, curstate, curdir))))
+			base_icon_dir = SOUTH
+
+	if(!base_icon_dir)
+		base_icon_dir = curdir
 
 	var/curblend
 	if(A.blend_mode == BLEND_DEFAULT)
@@ -683,7 +693,7 @@ The _flatIcons list is a cache for generated icon files.
 	var/image/copy
 	// Add the atom's icon itself, without pixel_x/y offsets.
 	if(!noIcon)
-		copy = image(icon=curicon, icon_state=curstate, layer=A.layer, dir=curdir)
+		copy = image(icon=curicon, icon_state=curstate, layer=A.layer, dir=base_icon_dir)
 		copy.color = A.color
 		copy.alpha = A.alpha
 		copy.blend_mode = curblend
@@ -820,6 +830,18 @@ The _flatIcons list is a cache for generated icon files.
 	flat_icon.AddAlphaMask(alpha_mask)//Finally, let's mix in a distortion effect.
 	return flat_icon
 
+/proc/build_disappear_icon(atom/A)
+	var/icon/disappear_icon = new(getFlatIcon(A))
+	var/W = disappear_icon.Width()
+	var/H = disappear_icon.Height()
+	var/icon/T = icon('icons/effects/effects.dmi',"disappear")
+	if(W != world.icon_size || H != world.icon_size)
+		T.Scale(W, H)
+	T.BecomeAlphaMask()
+	disappear_icon.MapColors(rgb(45,45,45), rgb(70,70,70), rgb(30,30,30), rgb(0,0,0))
+	disappear_icon.AddAlphaMask(T)
+	return disappear_icon
+
 //For photo camera.
 /proc/build_composite_icon(atom/A)
 	var/icon/composite = icon(A.icon, A.icon_state, A.dir, 1)
@@ -855,8 +877,13 @@ var/global/list/humanoid_icon_cache = list()
 
 		if(prefs)
 			prefs.copy_to(body)
+		var/datum/species/S = all_species[prefs.species]
+		if(S)
+			S.before_job_equip(body, J, TRUE)
 		if(J)
 			J.equip(body, TRUE)
+		if(S)
+			S.after_job_equip(body, J, TRUE)
 
 		var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
 

@@ -155,7 +155,7 @@
 	if(!client)
 		return 0
 
-	if (src.stat == DEAD || XRAY in mutations || src.sight_mode & BORGXRAY)
+	if (src.stat == DEAD || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
 		set_EyesVision()
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
@@ -264,7 +264,7 @@
 
 	if(pullin)
 		if(pulling)
-			pullin.icon_state = "pull"
+			pullin.icon_state = "pull1"
 		else
 			pullin.icon_state = "pull0"
 

@@ -117,13 +117,11 @@
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-
 // WHY this self_message/blind_message/deaf_message so inconsistent as positional args!
 // todo:
 // * need to combine visible_message/audible_message to one proc (something like show_message) (maybe it will be a mess because of *_distance ?)
 // * replace show_message in /emote()'s & custom_emote()
 // * need some version combined with playsound (one cycle for audio message and sound)
-
 /mob/visible_message(message, self_message, blind_message, viewing_distance = world.view, list/ignored_mobs)
 	for(var/mob/M in (viewers(get_turf(src), viewing_distance) - ignored_mobs)) //todo: get_hearers_in_view() (tg)
 
@@ -137,7 +135,6 @@
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-
 /atom/proc/visible_message(message, blind_message, viewing_distance = world.view, list/ignored_mobs)
 	//todo: for range<=1 combine SHOWMSG_FEEL with SHOWMSG_VISUAL like in custom_emote?
 	for(var/mob/M in (viewers(get_turf(src), viewing_distance) - ignored_mobs)) //todo: get_hearers_in_view() (tg)
@@ -183,7 +180,7 @@
 	return
 
 /mob/proc/incapacitated(restrained_type = ARMS)
-	return
+	return FALSE
 
 /mob/proc/restrained()
 	return
@@ -308,6 +305,7 @@
 
 	face_atom(A)
 	A.examine(src)
+	SEND_SIGNAL(A, COMSIG_PARENT_POST_EXAMINE, src)
 
 /mob/verb/pointed(atom/A as mob|obj|turf in oview())
 	set name = "Point To"
@@ -315,7 +313,7 @@
 
 	if(!usr || !isturf(usr.loc))
 		return
-	if(usr.stat || usr.restrained())
+	if(usr.incapacitated())
 		return
 	if(usr.status_flags & FAKEDEATH)
 		return
@@ -502,11 +500,14 @@
 
 //this and stop_pulling really ought to be /mob/living procs
 /mob/proc/start_pulling(atom/movable/AM)
-	if(!AM || !src || src == AM || !isturf(AM.loc))	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
+	if(!AM.can_be_pulled || src == AM || !isturf(AM.loc))	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 	if(!AM.anchored)
 		if(ismob(AM))
 			var/mob/M = AM
+			if(get_size_ratio(M, src) > pull_size_ratio)
+				to_chat(src, "<span class=warning>You are too small in comparison to [M] to pull them!</span>")
+				return
 			if(M.buckled) // If we are trying to pull something that is buckled we will pull the thing its buckled to
 				start_pulling(M.buckled)
 				return
@@ -519,6 +520,11 @@
 			if(AM == pulling)
 				return
 			stop_pulling()
+
+		if(SEND_SIGNAL(src, COMSIG_LIVING_START_PULL, AM) & COMPONENT_PREVENT_PULL)
+			return
+		if(SEND_SIGNAL(AM, COMSIG_ATOM_START_PULL, src) & COMPONENT_PREVENT_PULL)
+			return
 
 		src.pulling = AM
 		AM.pulledby = src
@@ -546,8 +552,13 @@
 	set category = "IC"
 
 	if(pulling)
-		pulling.pulledby = null
-		pulling = null
+		SEND_SIGNAL(src, COMSIG_LIVING_STOP_PULL, pulling)
+		SEND_SIGNAL(pulling, COMSIG_ATOM_STOP_PULL, src)
+
+		// What if the signals above somehow deleted pulledby?
+		if(pulling)
+			pulling.pulledby = null
+			pulling = null
 		if(pullin)
 			pullin.update_icon(src)
 		count_pull_debuff()
@@ -939,12 +950,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 		return
 	usr.next_move = world.time + 20
 
-	if(usr.stat == UNCONSCIOUS)
-		to_chat(usr, "You are unconcious and cannot do that!")
-		return
-
-	if(usr.restrained())
-		to_chat(usr, "You are restrained and cannot do that!")
+	if(usr.incapacitated())
+		to_chat(usr, "You can not do this while being incapacitated!")
 		return
 
 	var/mob/S = src
@@ -1027,9 +1034,21 @@ note dizziness decrements automatically in the mob's Life() proc.
 					return G
 				break
 
+/mob/proc/GetSpell(spell_type)
+	for(var/obj/effect/proc_holder/spell/spell in spell_list)
+		if(spell == spell_type)
+			return spell
+
+	if(mind)
+		for(var/obj/effect/proc_holder/spell/spell in mind.spell_list)
+			if(spell == spell_type)
+				return spell
+	return FALSE
+
 /mob/proc/AddSpell(obj/effect/proc_holder/spell/spell)
 	spell_list += spell
-	mind.spell_list += spell	//Connect spell to the mind for transfering action buttons between mobs
+	if(mind)
+		mind.spell_list += spell	//Connect spell to the mind for transfering action buttons between mobs
 	if(!spell.action)
 		spell.action = new/datum/action/spell_action
 		spell.action.target = spell
@@ -1040,6 +1059,22 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(isliving(src))
 		spell.action.Grant(src)
 	return
+
+/mob/proc/RemoveSpell(obj/effect/proc_holder/spell/S)
+	spell_list -= S
+	if(mind)
+		mind.spell_list -= S
+	qdel(S)
+
+/mob/proc/ClearSpells()
+	for(var/spell in spell_list)
+		spell_list -= spell
+		qdel(spell)
+
+	if(mind)
+		for(var/spell in mind.spell_list)
+			mind.spell_list -= spell
+			qdel(spell)
 
 /mob/proc/set_EyesVision(preset = null, transition_time = 5)
 	if(!client) return
@@ -1103,5 +1138,18 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/can_unbuckle(mob/user)
 	return 1
 
+/mob/proc/get_targetzone()
+	return null
+
 /mob/proc/update_stat()
 	return
+
+/mob/proc/can_pickup(obj/O)
+	return TRUE
+
+/atom/movable/proc/is_facehuggable()
+	return FALSE
+
+// Return null if mob of this type can not scramble messages.
+/mob/proc/get_scrambled_message(message, datum/language/speaking = null)
+	return speaking ? speaking.scramble(message) : stars(message)

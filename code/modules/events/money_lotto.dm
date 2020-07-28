@@ -5,11 +5,13 @@
 
 /datum/event/money_lotto/start()
 	winner_sum = pick(5000, 10000, 50000, 100000, 500000, 1000000, 1500000)
-	if(all_money_accounts.len)
-		var/datum/money_account/D = pick(all_money_accounts)
+	var/list/employee_accounts = list() + all_money_accounts
+	employee_accounts.Remove(department_accounts)
+	if(employee_accounts.len)
+		var/datum/money_account/D = pick(employee_accounts)
 		winner_name = D.owner_name
 		if(!D.suspended)
-			D.money += winner_sum
+			D.adjust_money(winner_sum)
 
 			var/datum/transaction/T = new()
 			T.target_name = "[system_name()] Daily Grand Slam -Stellar- Lottery"

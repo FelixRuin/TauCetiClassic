@@ -65,6 +65,12 @@
 	canister_color = "black"
 	gas_type = "carbon_dioxide"
 
+/obj/machinery/portable_atmospherics/canister/hydrogen
+	name = "Canister \[H2\]"
+	icon_state = "purple"
+	canister_color = "purple"
+	gas_type = "hydrogen"
+
 /obj/machinery/portable_atmospherics/canister/air // this one uses its own create_gas() proc.
 	name = "Canister \[Air\]"
 	icon_state = "grey"
@@ -278,7 +284,7 @@ update_flag
 	qdel(src)
 
 /obj/machinery/portable_atmospherics/canister/attackby(obj/item/weapon/W, mob/user)
-	if(user.a_intent != I_HURT && iswelder(W))
+	if(user.a_intent != INTENT_HARM && iswelder(W))
 		if(user.is_busy(src))
 			return
 		var/obj/item/weapon/weldingtool/WT = W
@@ -436,6 +442,7 @@ update_flag
 				"\[CO2\]" = "black", \
 				"\[Air\]" = "grey", \
 				"\[CAUTION\]" = "yellow", \
+				"\[H2\]" = "purple", \
 			)
 			var/label = input("Choose canister label", "Gas canister") as null|anything in colors
 			if (label)

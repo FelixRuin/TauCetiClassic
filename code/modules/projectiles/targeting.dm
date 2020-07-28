@@ -51,7 +51,7 @@
 		Aim(A) 	//Clicked a mob, aim at them
 	else  		//Didn't click someone, check if there is anyone along that guntrace
 		var/mob/living/M = GunTrace(usr.x,usr.y,A.x,A.y,usr.z,usr)  //Find dat mob.
-		if(M && isliving(M) && M in view(user) && !(M in target))
+		if(M && isliving(M) && (M in view(user)) && !(M in target))
 			Aim(M) //Aha!  Aim at them!
 		else if(!ismob(M) || (ismob(M) && !(M in view(user)))) //Nope!  They weren't there!
 			Fire(A,user,params)  //Fire like normal, then.
@@ -313,17 +313,9 @@
 					to_chat(M, "Your character may now <b>walk</b> at the discretion of their targeter.")
 					if(!target_can_run)
 						to_chat(M, "<span class='warning'>Your move intent is now set to walk, as your targeter permits it.</span>")
-						M.set_m_intent("walk")
+						M.set_m_intent(MOVE_INTENT_WALK)
 				else
 					to_chat(M, "<span class='warning'><b>Your character will now be shot if they move.</b></span>")
-
-/mob/living/proc/set_m_intent(intent)
-	if (intent != "walk" && intent != "run")
-		return 0
-	m_intent = intent
-	if(hud_used)
-		if (hud_used.move_intent)
-			hud_used.move_intent.icon_state = intent == "walk" ? "walking" : "running"
 
 /client/verb/AllowTargetRun()
 	set hidden=1
