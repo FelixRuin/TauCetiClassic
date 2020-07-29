@@ -354,7 +354,7 @@
 
 /obj/item/scp513/pickup(mob/living/user)
 	. = ..()
-	if(user.a_intent == I_HURT)
+	if(user.a_intent == HURT)
 		to_chat(user, "<span class='danger'><b><i>You accidentally ring \the [src]!</i></b></span>")
 		ring(user)
 
@@ -799,24 +799,6 @@
 	icon_dead = "eye2_dead"
 	speed = -2
 
-/obj/machinery/power/supermatter/SCP_037
-	name = "SCP-037"
-	desc = "Wow, a star from the sky a few meters away. <span class='warning'>You get headaches just from looking at it.</span>"
-	icon = 'code/modules/SCP/SCP/SCP-037.dmi'
-	icon_state = "star"
-	base_icon_state = "star"
-	density = 1
-	anchored = 0
-	light_range = 10
-	safe_alert = "Crystaline hyperstructure returning to safe operating levels."
-	warning_point = 300
-	warning_alert = "Danger! SCP-037 hyperstructure instability!"
-	emergency_point = 2100
-	emergency_alert = "SCP-037 DELAMINATION IMMINENT."
-	explosion_point = 3000
-	light_color = "#F39F18"
-
-
 /obj/effect/proc_holder/spell/aoe_turf/scp939_voice
 	name = "Mimic voice"
 	desc = ""
@@ -995,8 +977,7 @@
 	emote_hear = list("says")
 
 	harm_intent_damage = 0
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage = 20
 	attacktext = " brutally bites"
 	environment_smash = 0
 
@@ -1833,7 +1814,7 @@
 
 /mob/living/carbon/human/scp073/attack_animal(mob/living/simple_animal/M)
 	if(M)
-		if(M.melee_damage_upper == 0)
+		if(M.melee_damage == 0)
 			M.emote("[M.friendly] [src]")
 			return TRUE
 		else
@@ -1842,7 +1823,7 @@
 			visible_message("<span class='userdanger'><B>[M]</B>[M.attacktext] [src]!</span>")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-			var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+			var/damage = rand(M.melee_damage - 5, M.melee_damage)
 			M.adjustBruteLoss(damage)
 			M.do_attack_animation(src)
 			apply_effect(damage,AGONY,0)
